@@ -1,0 +1,31 @@
+.dashboard-container {
+    margin-top: 50px;
+  }
+  
+  .dashboard-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .user-table {
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-table th,
+  .user-table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .delete-button {
+    margin: auto;
+    display: block;
+    font-size: 0.9rem;
+  }
+  
