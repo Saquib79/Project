@@ -1,9 +1,12 @@
+console.log('Current working directory:', process.cwd());
 console.log('Server starting...');
 console.log('Current working directory:', process.cwd());
 // server/server.js
 const express = require('express');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
+const fs = require('fs');
+console.log('Directory contents:', fs.readdirSync('.'));
 
 const app = express();
 app.use(cors());
