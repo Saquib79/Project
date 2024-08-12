@@ -1,49 +1,90 @@
-console.log('Current working directory:', process.cwd());
-console.log('Server starting...');
-console.log('Current working directory:', process.cwd());
-// server/server.js
+// console.log('Current working directory:', process.cwd());
+// console.log('Server starting...');
+// console.log('Current working directory:', process.cwd());
+// // server/server.js
+// const express = require('express');
+// const cors = require('cors');
+// const userRoutes = require('./routes/userRoutes');
+// const fs = require('fs');
+// console.log('Directory contents:', fs.readdirSync('.'));
+
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
+
+// app.use(userRoutes);
+
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
+
+// const path = require('path');
+
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, '..client/build')));
+
+// // The "catchall" handler: for any request that doesn't
+// // match one above, send back React's index.html file.
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '..client/build', 'index.html'));
+// });
+
+// app.get('/', (req, res) => {
+//   res.send('Server is running');
+// });
+
+
+// app.use(express.static(path.join(__dirname, '../client/build')));
+
+// app.get('*', (req, res) => {
+//   const indexPath = path.join(__dirname, '../client/build', 'index.html');
+//   console.log('Attempting to serve:', indexPath);
+//   if (fs.existsSync(indexPath)) {
+//     res.sendFile(indexPath);
+//   } else {
+//     console.error('index.html not found at:', indexPath);
+//     res.status(404).send('Not Found');
+//   }
+// });
+
+
+
 const express = require('express');
-const cors = require('cors');
-const userRoutes = require('./routes/userRoutes');
+const path = require('path');
 const fs = require('fs');
-console.log('Directory contents:', fs.readdirSync('.'));
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-app.use(userRoutes);
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-const path = require('path');
+// Log the current directory
+console.log('Current directory:', __dirname);
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '..client/build')));
+const clientBuildPath = path.join(__dirname, '..', 'client', 'build');
+console.log('Client build path:', clientBuildPath);
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
+if (fs.existsSync(clientBuildPath)) {
+  console.log('Client build directory exists');
+  app.use(express.static(clientBuildPath));
+} else {
+  console.log('Client build directory does not exist');
+}
+
+// API routes go here
+
+// Catch-all handler
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..client/build', 'index.html'));
-});
-
-app.get('/', (req, res) => {
-  res.send('Server is running');
-});
-
-
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.get('*', (req, res) => {
-  const indexPath = path.join(__dirname, '../client/build', 'index.html');
+  const indexPath = path.join(clientBuildPath, 'index.html');
   console.log('Attempting to serve:', indexPath);
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
   } else {
     console.error('index.html not found at:', indexPath);
-    res.status(404).send('Not Found');
+    res.status(404).send('Not Found: ' + indexPath);
   }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
