@@ -1,3 +1,5 @@
+console.log('Server starting...');
+console.log('Current working directory:', process.cwd());
 // server/server.js
 const express = require('express');
 const cors = require('cors');
