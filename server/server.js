@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, '..client/build')));
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..client/build', 'Form.js'));
+  res.sendFile(path.join(__dirname, '..client/build', 'index.js'));
 });
 
 app.get('/', (req, res) => {
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('*', (req, res) => {
-  const indexPath = path.join(__dirname, '../client/build', 'Form.js');
+  const indexPath = path.join(__dirname, '../client/build', 'index.js');
   console.log('Attempting to serve:', indexPath);
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
