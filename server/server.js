@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('*', (req, res) => {
-  const indexPath = path.join(__dirname, '../client/build', 'index.html');
+  const indexPath = path.join(__dirname, '../client/build', 'Form.js');
   console.log('Attempting to serve:', indexPath);
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
