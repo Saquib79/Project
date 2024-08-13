@@ -31,7 +31,8 @@ app.get('*', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Server is running');
+  constfilePath=path.join(__dirname, 'Task1', 'public', 'index.html');
+  console.log('Serving index.html from:', filePath);
 });
 
 
